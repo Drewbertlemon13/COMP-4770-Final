@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "SwapCamera",
+                    "type": "Button",
+                    "id": "241cf65c-3efb-4dc8-ba7b-eabb3c116853",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -141,6 +150,56 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cfb463f5-e312-446e-a1af-825778abdf56",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox",
+                    "action": "SwapCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89b3d6f3-15c5-4814-b760-67a3df13ea91",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SwapCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "TopCamera",
+            "id": "57c9666c-f069-47cd-a57d-b74827f2a9fc",
+            "actions": [
+                {
+                    "name": "MoveCam",
+                    "type": "Value",
+                    "id": "5732c99c-072b-409c-b82f-a5cfdea8c118",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c9ac5966-1150-4e24-b84b-26230fd2e059",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "MoveCam",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
