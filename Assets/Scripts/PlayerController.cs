@@ -19,65 +19,53 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Top-Down Camera")]
     public GameObject tdCam;
 
-    private GameObject[] cameras;
+    [Header("Action Maps")]
+    [Tooltip("First-Person Action Map")]
+    public MapFirstPerson mapFP;
+    [Tooltip("Top-Down Action Map")]
+    public MapTopDown mapTD;
+
+    // Array to hold our cameras, Index of current camera
+    public GameObject[] cameras;
+    public int activeCamera;
 
     // Tracks input directions
-    private float moveX;
-    private float moveY;
+    public float moveX;
+    public float moveY;
 
-    private Vector3 direction;
+    // Direction holder and Rigidbody of player
+    public Vector3 direction;
+    public Rigidbody rigidbody;
 
-    Rigidbody rigidbody;
+    // Players Action Mapping
+    public PlayerActions playerInput;
 
-    private int activeCamera;
-
-    private PlayerActions playerInput;
-
+    // Set up some variables before we start the code
     void Awake()
     {
-        // Sets up the players input
         playerInput = new PlayerActions();
         playerInput.FirstPerson.Enable();
-        playerInput.FirstPerson.Jump.performed += Jump;
-        playerInput.FirstPerson.SwapCamera.performed += SwapCam;
 
         // Gets the current active player camera
-        GameObject[] tmp_cameras = {fpCam, tdCam};
+        GameObject[] tmp_cameras = {fpCam, tdCam}; // Create an array of all our cameras
         cameras = tmp_cameras;
-        activeCamera = 0;
+        activeCamera = 0; // Keep track of the position of the camera in the array
         for(int i = 1; i < cameras.Length; i++)
         {
-            cameras[i].SetActive(false);
+            cameras[i].SetActive(false);    // Set all other cameras to false
         }
     }
 
-    // Start is called before the first frame update
+    // Gets the rigidbody of the player and freeze it's rotation so it doesn't fall over
     void Start()
     {
         rigidbody = this.GetComponent<Rigidbody>();
         rigidbody.freezeRotation = true;
     }
 
-    void FixedUpdate()
-    {
-        Move();
-    }
-
-    public void Jump(InputAction.CallbackContext context)
-    {
-        if(context.performed)
-        {
-            rigidbody.AddForce(Vector3.up * 2f, ForceMode.Impulse);
-        }
-    }
-
-    public void Move()
-    {
-        direction = playerInput.FirstPerson.Move.ReadValue<Vector2>();
-        direction = orientation.right * direction.x + orientation.forward * direction.y;
-        rigidbody.AddForce(direction.normalized * movementSpeed, ForceMode.Force);
-    }
-
+    // Changes the camera for the user
+    // should change mapping too
+    /*
     public void SwapCam(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -90,7 +78,7 @@ public class PlayerController : MonoBehaviour
                 if(activeCamera == 1)
                 {
                     cameras[activeCamera].transform.position = new Vector3(-80, 120, 0);
-                    // Toggle the new map
+                    InputManager.playerInput.ToggleActionMap(playerInput.TopCamera);
                     // Reset the position
                 }
                 
@@ -103,4 +91,5 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    */
 }

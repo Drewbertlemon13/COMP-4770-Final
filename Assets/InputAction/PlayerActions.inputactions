@@ -189,6 +189,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "SwapCamera",
+                    "type": "Button",
+                    "id": "7a15f705-a713-45c0-8fc1-a7734b17ca4d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -200,6 +209,39 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "MoveCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "04f95a7e-dffa-4bab-b4ca-b2dd919133e8",
+                    "path": "<XInputController>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox",
+                    "action": "MoveCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e20245f-932e-4753-8718-1c6c60daf024",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "SwapCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "409d7688-93fa-4d3d-a3f4-19ad1028c34a",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Xbox",
+                    "action": "SwapCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

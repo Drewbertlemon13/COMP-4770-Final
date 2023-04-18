@@ -211,6 +211,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SwapCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a15f705-a713-45c0-8fc1-a7734b17ca4d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -222,6 +231,39 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""MoveCam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04f95a7e-dffa-4bab-b4ca-b2dd919133e8"",
+                    ""path"": ""<XInputController>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox"",
+                    ""action"": ""MoveCam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e20245f-932e-4753-8718-1c6c60daf024"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SwapCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""409d7688-93fa-4d3d-a3f4-19ad1028c34a"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox"",
+                    ""action"": ""SwapCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -262,6 +304,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         // TopCamera
         m_TopCamera = asset.FindActionMap("TopCamera", throwIfNotFound: true);
         m_TopCamera_MoveCam = m_TopCamera.FindAction("MoveCam", throwIfNotFound: true);
+        m_TopCamera_SwapCamera = m_TopCamera.FindAction("SwapCamera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -379,11 +422,13 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_TopCamera;
     private ITopCameraActions m_TopCameraActionsCallbackInterface;
     private readonly InputAction m_TopCamera_MoveCam;
+    private readonly InputAction m_TopCamera_SwapCamera;
     public struct TopCameraActions
     {
         private @PlayerActions m_Wrapper;
         public TopCameraActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveCam => m_Wrapper.m_TopCamera_MoveCam;
+        public InputAction @SwapCamera => m_Wrapper.m_TopCamera_SwapCamera;
         public InputActionMap Get() { return m_Wrapper.m_TopCamera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -396,6 +441,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @MoveCam.started -= m_Wrapper.m_TopCameraActionsCallbackInterface.OnMoveCam;
                 @MoveCam.performed -= m_Wrapper.m_TopCameraActionsCallbackInterface.OnMoveCam;
                 @MoveCam.canceled -= m_Wrapper.m_TopCameraActionsCallbackInterface.OnMoveCam;
+                @SwapCamera.started -= m_Wrapper.m_TopCameraActionsCallbackInterface.OnSwapCamera;
+                @SwapCamera.performed -= m_Wrapper.m_TopCameraActionsCallbackInterface.OnSwapCamera;
+                @SwapCamera.canceled -= m_Wrapper.m_TopCameraActionsCallbackInterface.OnSwapCamera;
             }
             m_Wrapper.m_TopCameraActionsCallbackInterface = instance;
             if (instance != null)
@@ -403,6 +451,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @MoveCam.started += instance.OnMoveCam;
                 @MoveCam.performed += instance.OnMoveCam;
                 @MoveCam.canceled += instance.OnMoveCam;
+                @SwapCamera.started += instance.OnSwapCamera;
+                @SwapCamera.performed += instance.OnSwapCamera;
+                @SwapCamera.canceled += instance.OnSwapCamera;
             }
         }
     }
@@ -435,5 +486,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     public interface ITopCameraActions
     {
         void OnMoveCam(InputAction.CallbackContext context);
+        void OnSwapCamera(InputAction.CallbackContext context);
     }
 }

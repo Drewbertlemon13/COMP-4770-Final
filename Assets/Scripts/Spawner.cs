@@ -1,11 +1,8 @@
-/*
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-// Script to control the agents movement
-public class AgentController : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -19,4 +16,3 @@ public class AgentController : MonoBehaviour
         
     }
 }
-*/
