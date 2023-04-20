@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     public float moveY;
 
     // Direction holder and Rigidbody of player
-    public Rigidbody rigidbody;
+    public Rigidbody rg;
 
     private Vector3 movDirection;
 
@@ -68,13 +68,13 @@ public class PlayerController : MonoBehaviour
     // Gets the rigidbody of the player and freeze it's rotation so it doesn't fall over
     void Start()
     {
-        rigidbody = this.GetComponent<Rigidbody>();
-        rigidbody.freezeRotation = true;
+        rg = this.GetComponent<Rigidbody>();
+        rg.freezeRotation = true;
     }
 
     void FixedUpdate()
     {
-        rigidbody.AddForce(movDirection.normalized * movementSpeed, ForceMode.Force);
+        rg.AddForce(movDirection.normalized * movementSpeed, ForceMode.Force);
     }
 
     public void Look(InputAction.CallbackContext context)
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         if(context.performed)
         {
-            rigidbody.AddForce(Vector3.up * 6f, ForceMode.Impulse);
+            rg.AddForce(Vector3.up * 6f, ForceMode.Impulse);
         }
     }
 
@@ -126,6 +126,7 @@ public class PlayerController : MonoBehaviour
         if (activeCamera == 1)
         {
             playerInput.SwitchCurrentActionMap("TopCamera");
+            Cursor.lockState = CursorLockMode.None;
             cameras[activeCamera].transform.position = new(-80, 120, 0);
         }
         else

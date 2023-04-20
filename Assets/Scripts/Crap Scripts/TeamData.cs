@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class TeamData
 {
     int strategyIndex = 0;
-    int money = 0;
+    //int money = 0;
     List<NavMeshAgent> agents = new List<NavMeshAgent>();
 
     public void changeStrat(int strategy)

@@ -26,15 +26,14 @@ public class TestUnit : MonoBehaviour
     public Material red;
 
     private GameData gameData;
-    public int strategy = 0;
+    public int strategy;
     public bool IsAlive => health > 0;
     private bool shot = false;
 
     void Awake()
     {
         gameData = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameData>();
-        if(type != null)
-        {
+        if(type != null){    
             if(type == 0)
             {
                 gameData.units.Add(gameObject);
@@ -80,6 +79,7 @@ public class TestUnit : MonoBehaviour
             {
                 gameData.reactors.Remove(gameObject);
             }
+
             Destroy(gameObject);
         }
     }

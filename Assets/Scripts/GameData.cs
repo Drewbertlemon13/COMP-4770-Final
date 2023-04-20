@@ -22,6 +22,7 @@ public class GameData : MonoBehaviour
 
     public List<GameObject> gates;
     public List<GameObject> reactors;
+    public List<GameObject> nodes;
     public List<GameObject> units;
 
     private int blueUnits;
@@ -34,6 +35,7 @@ public class GameData : MonoBehaviour
     {
         gates = GameObject.FindGameObjectsWithTag("Gate").ToList();
         reactors = GameObject.FindGameObjectsWithTag("Reactor").ToList();
+        nodes = GameObject.FindGameObjectsWithTag("Node").ToList();
     }
 
     void FixedUpdate()
@@ -51,21 +53,21 @@ public class GameData : MonoBehaviour
             {
                 blueRespawn = false;
                 StartCoroutine(respawn(blueRespawn));
-                int num = Random.Range(1, 3);
+                int num = Random.Range((int)1, (int)3);
                 if(num == 1)
                 {
-                    bSpawner1.GetComponent<Spawner>().Spawn(0, 0, 0);
+                    bSpawner1.GetComponent<Spawner>().Spawn(0, 0, 2);
                 }
                 else
                 {
-                    bSpawner2.GetComponent<Spawner>().Spawn(0, 0, 0);
+                    bSpawner2.GetComponent<Spawner>().Spawn(0, 0, 2);
                 }
             }
             if(redUnits < 8 && redRespawn == true)
             {
                 redRespawn = false;
                 StartCoroutine(respawn(redRespawn));
-                int num = Random.Range(1, 3);
+                int num = Random.Range((int)1, (int)3);
                 if(num == 1)
                 {
                     rSpawner1.GetComponent<Spawner>().Spawn(1, 0, 0);

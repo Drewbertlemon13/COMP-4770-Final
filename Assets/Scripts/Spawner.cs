@@ -12,8 +12,7 @@ public class Spawner : MonoBehaviour
 
     public void Spawn(int team, int type, int strategy)
     {
-        Debug.Log("Spawning Unit");
-        _unit = Instantiate(unit, transform.position + transform.forward * 5, Quaternion.identity);
+        _unit = Instantiate(unit, transform.position, Quaternion.identity);
         _unit.GetComponent<TestUnit>().setVariables(20, 10, team, type, strategy);
     }
 

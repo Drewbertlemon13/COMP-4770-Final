@@ -9,6 +9,7 @@ TagManager:
   - Reactor
   - Unit
   - GameData
+  - Node
   layers:
   - Default
   - TransparentFX
