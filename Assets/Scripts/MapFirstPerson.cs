@@ -10,6 +10,7 @@ public class MapFirstPerson : PlayerController
     // Sets up the players input
     void OnEnable()
     { 
+        /*
         // Should have one already but just in case
         if(playerInput == null){
             playerInput = new PlayerActions();
@@ -18,34 +19,38 @@ public class MapFirstPerson : PlayerController
         playerInput.FirstPerson.Enable();
         playerInput.FirstPerson.Jump.performed += Jump;
         playerInput.FirstPerson.SwapCamera.performed += SwapCam;
+        */
     }
 
     // Allows us to move based on the players input
     void FixedUpdate()
     {
-        Move();
+        //Move();
     }
 
     // Allows us to jump in first person
     // Need to add the jump limit
     public void Jump(InputAction.CallbackContext context)
     {
+        /*
         if(context.performed)
         {
             rigidbody.AddForce(Vector3.up * 2f, ForceMode.Impulse);
         }
+        */
     }
 
     // Allows us to move around in first person
     public void Move()
     {
-        direction = playerInput.FirstPerson.Move.ReadValue<Vector2>();
-        direction = orientation.right * direction.x + orientation.forward * direction.y;
-        rigidbody.AddForce(direction.normalized * movementSpeed, ForceMode.Force);
+        //direction = playerInput.FirstPerson.Move.ReadValue<Vector2>();
+        //direction = orientation.right * direction.x + orientation.forward * direction.y;
+        //rigidbody.AddForce(direction.normalized * movementSpeed, ForceMode.Force);
     }
 
     public void SwapCam(InputAction.CallbackContext context)
     {
+        /*
         if (context.started)
         {
             if(cameras[0].active)
@@ -65,12 +70,13 @@ public class MapFirstPerson : PlayerController
                 Debug.Log("Swapping to TopDown");
             }
         }
+        */
     }
 
     // Unsubscribes from this FPS mapping so we can use another
     void OnDisable()
     {
-        playerInput.FirstPerson.Jump.performed -= Jump;
-        playerInput.FirstPerson.SwapCamera.performed -= SwapCam;
+        //playerInput.FirstPerson.Jump.performed -= Jump;
+        //playerInput.FirstPerson.SwapCamera.performed -= SwapCam;
     }
 }

@@ -10,6 +10,7 @@ public class MapTopDown : PlayerController
     // Sets up the players input
     void OnEnable()
     { 
+        /*
         // Should have one already but just in case
         if(playerInput == null){
             playerInput = new PlayerActions();
@@ -17,19 +18,20 @@ public class MapTopDown : PlayerController
 
         playerInput.TopCamera.Enable();
         playerInput.TopCamera.SwapCamera.performed += SwapCam;
+        */
     }
 
     // Allows us to move based on the players input
     void FixedUpdate()
     {
-        MoveCam();
+        //MoveCam();
     }
 
     // Allows us to move around in first person
     public void MoveCam()
     {
         
-        direction = playerInput.TopCamera.MoveCam.ReadValue<Vector2>().normalized;
+        //direction = playerInput.TopCamera.MoveCam.ReadValue<Vector2>().normalized;
         /*
         //direction = orientation.right * direction.x + orientation.forward * direction.y;
         // Gets our mouse position and multiplies to use deltaTime
@@ -46,11 +48,12 @@ public class MapTopDown : PlayerController
         transform.rotation = Quaternion.Euler(xRot, yRot, 0);
         orientation.rotation = Quaternion.Euler(0, yRot, 0);
         */
-        cameras[0].transform.LookAt(new Vector3(direction.x, 120, direction.y));
+        //cameras[0].transform.LookAt(new Vector3(direction.x, 120, direction.y));
     }
 
     public void SwapCam(InputAction.CallbackContext context)
     {
+        /*
         if (context.started)
         {
             if(cameras[1].active)
@@ -70,11 +73,12 @@ public class MapTopDown : PlayerController
                 Debug.Log("Swapping to FPS");
             }
         }
+        */
     }
 
     // Unsubscribes from this TopCamera mapping so we can use another
     void OnDisable()
     {
-        playerInput.TopCamera.SwapCamera.performed -= SwapCam;
+        //playerInput.TopCamera.SwapCamera.performed -= SwapCam;
     }
 }

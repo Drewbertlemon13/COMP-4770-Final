@@ -33,7 +33,17 @@ public class TestUnit : MonoBehaviour
     void Awake()
     {
         gameData = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameData>();
-        gameData.units.Add(gameObject);
+        if(type != null)
+        {
+            if(type == 0)
+            {
+                gameData.units.Add(gameObject);
+            }
+        }
+        else
+        {
+            gameData.units.Add(gameObject);
+        }
     }
 
     public void setVariables(int health, int damage, int team, int type, int strategy)

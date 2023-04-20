@@ -80,7 +80,6 @@ public class GameData : MonoBehaviour
 
     IEnumerator respawn(bool respawn)
     {
-        Debug.Log("Start Coroutine");
         yield return new WaitForSeconds(5);
         if(respawn == redRespawn){redRespawn = true;}
         else if (respawn == blueRespawn){blueRespawn = true;}
