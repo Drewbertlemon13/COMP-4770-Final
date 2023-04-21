@@ -31,8 +31,8 @@ public class GameData : MonoBehaviour
     private bool blueRespawn = true;
     private bool redRespawn = true;
 
-    private int bStrat1 = 0;
-    private int bStrat2 = 0;
+    private int bStrat1 = 2;
+    private int bStrat2 = 2;
     private int rStrat1 = 0;
     private int rStrat2 = 0;
 
@@ -57,41 +57,43 @@ public class GameData : MonoBehaviour
 
             if(blueUnits < 8 && blueRespawn)
             {
-                addSingleStrat(0, 0, bStrat1, bStrat2, bSpawner1, bSpawner2, blueRespawn, blueUnits);
+                addSingleStrat(0, 0, bStrat1, bStrat2, bSpawner1, bSpawner2);
             }
 
             else if(redUnits < 8 && redRespawn)
             {
-                addSingleStrat(1, 0, rStrat1, rStrat2, rSpawner1, rSpawner2, redRespawn, redUnits);
+                addSingleStrat(1, 0, rStrat1, rStrat2, rSpawner1, rSpawner2);
             }
         }
     }
 
-    public void addSingleStrat(int team, int type, int strat1, int strat2, GameObject spawner1, GameObject spawner2, bool reFlag, int numUnits)
+    public void addSingleStrat(int team, int type, int strat1, int strat2, GameObject spawner1, GameObject spawner2)
     {
-        int num;
-
-        if(numUnits < 8 && reFlag)
+        if(team == 0)
         {
-            if(reFlag == redRespawn){redRespawn = false;}
-            else if (reFlag == blueRespawn){blueRespawn = false;}
-            StartCoroutine(respawn(reFlag));
-            num = (int)Random.Range(1, 3);
-            if(num == 1)
-            {
+            blueRespawn = false;
+        }
+        else
+        {
+            redRespawn = false;
+        }
+            
+        StartCoroutine(respawn(team));
+        switch (Random.Range(1, 3))
+        {
+            case 1:
                 spawner1.GetComponent<Spawner>().Spawn(team, type, strat1);
-            }
-            else if(num == 2)
-            {
+                break;
+            case 2:
                 spawner2.GetComponent<Spawner>().Spawn(team, type, strat2);
-            }
+                break;
         }
     }
 
-    IEnumerator respawn(bool respawn)
+    IEnumerator respawn(int team)
     {
         yield return new WaitForSeconds(5);
-        if(respawn == redRespawn){redRespawn = true;}
-        else if (respawn == blueRespawn){blueRespawn = true;}
+        if(team == 0){blueRespawn = true;}
+        else{redRespawn = true;}
     }
 }
