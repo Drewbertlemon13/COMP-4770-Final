@@ -19,12 +19,6 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Top-Down Camera")]
     public GameObject tdCam;
 
-    //[Header("Action Maps")]
-    //[Tooltip("First-Person Action Map")]
-    //public MapFirstPerson mapFP;
-    //[Tooltip("Top-Down Action Map")]
-    //public MapTopDown mapTD;
-
     // Array to hold our cameras, Index of current camera
     public GameObject[] cameras;
     public int activeCamera;
@@ -142,34 +136,4 @@ public class PlayerController : MonoBehaviour
         movDirection = context.ReadValue<Vector2>();
         movDirection = orientation.right * movDirection.x + orientation.forward * movDirection.y;
     }
-
-    // Changes the camera for the user
-    // should change mapping too
-    /*
-    public void SwapCam(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            if(cameras[0].active || cameras[1].active)
-            {
-                // Disables our active camera
-                cameras[activeCamera].SetActive(false);
-
-                if(activeCamera == 1)
-                {
-                    cameras[activeCamera].transform.position = new Vector3(-80, 120, 0);
-                    InputManager.playerInput.ToggleActionMap(playerInput.TopCamera);
-                    // Reset the position
-                }
-                
-                // Swaps to our next camera. If we are out of range, go back to starting camera
-                activeCamera += 1;
-                if(cameras.Length == activeCamera){Debug.Log(activeCamera);activeCamera = 0;}
-
-                // Sets the new camera to active
-                cameras[activeCamera].SetActive(true);
-            }
-        }
-    }
-    */
 }

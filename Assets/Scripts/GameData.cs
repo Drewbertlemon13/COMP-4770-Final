@@ -31,6 +31,11 @@ public class GameData : MonoBehaviour
     private bool blueRespawn = true;
     private bool redRespawn = true;
 
+    private int bStrat1 = 0;
+    private int bStrat2 = 0;
+    private int rStrat1 = 0;
+    private int rStrat2 = 0;
+
     void Awake()
     {
         gates = GameObject.FindGameObjectsWithTag("Gate").ToList();
@@ -49,33 +54,36 @@ public class GameData : MonoBehaviour
                 blueUnits += 1;
             }
             redUnits = units.Count - blueUnits;
+
             if(blueUnits < 8 && blueRespawn)
             {
-                blueRespawn = false;
-                StartCoroutine(respawn(blueRespawn));
-                int num = Random.Range((int)1, (int)3);
-                if(num == 1)
-                {
-                    bSpawner1.GetComponent<Spawner>().Spawn(0, 0, 2);
-                }
-                else
-                {
-                    bSpawner2.GetComponent<Spawner>().Spawn(0, 0, 2);
-                }
+                addSingleStrat(0, 0, bStrat1, bStrat2, bSpawner1, bSpawner2, blueRespawn, blueUnits);
             }
-            if(redUnits < 8 && redRespawn == true)
+
+            else if(redUnits < 8 && redRespawn)
             {
-                redRespawn = false;
-                StartCoroutine(respawn(redRespawn));
-                int num = Random.Range((int)1, (int)3);
-                if(num == 1)
-                {
-                    rSpawner1.GetComponent<Spawner>().Spawn(1, 0, 0);
-                }
-                else
-                {
-                    rSpawner2.GetComponent<Spawner>().Spawn(1, 0, 0);
-                }
+                addSingleStrat(1, 0, rStrat1, rStrat2, rSpawner1, rSpawner2, redRespawn, redUnits);
+            }
+        }
+    }
+
+    public void addSingleStrat(int team, int type, int strat1, int strat2, GameObject spawner1, GameObject spawner2, bool reFlag, int numUnits)
+    {
+        int num;
+
+        if(numUnits < 8 && reFlag)
+        {
+            if(reFlag == redRespawn){redRespawn = false;}
+            else if (reFlag == blueRespawn){blueRespawn = false;}
+            StartCoroutine(respawn(reFlag));
+            num = (int)Random.Range(1, 3);
+            if(num == 1)
+            {
+                spawner1.GetComponent<Spawner>().Spawn(team, type, strat1);
+            }
+            else if(num == 2)
+            {
+                spawner2.GetComponent<Spawner>().Spawn(team, type, strat2);
             }
         }
     }
